@@ -172,24 +172,32 @@ android-armeabi-v7a:
   extends:
     - .libretro-android-jni-armeabi-v7a
     - .core-defs
+  variables:
+    PLATFORM_ARGS: APP_ABI=$ANDROID_ABI APP_CFLAGS="-Wno-error=incompatible-function-pointer-types"
 
 # Android ARMv8a
 android-arm64-v8a:
   extends:
     - .libretro-android-jni-arm64-v8a
     - .core-defs
+  variables:
+    PLATFORM_ARGS: APP_ABI=$ANDROID_ABI APP_CFLAGS="-Wno-error=incompatible-function-pointer-types"
 
 # Android 64-bit x86
 android-x86_64:
   extends:
     - .libretro-android-jni-x86_64
     - .core-defs
-    
+  variables:
+    PLATFORM_ARGS: APP_ABI=$ANDROID_ABI APP_CFLAGS="-Wno-error=incompatible-function-pointer-types"
+
 # Android 32-bit x86
 android-x86:
   extends:
     - .libretro-android-jni-x86
     - .core-defs
+  variables:
+    PLATFORM_ARGS: APP_ABI=$ANDROID_ABI APP_CFLAGS="-Wno-error=incompatible-function-pointer-types"
 
 # iOS
 libretro-build-ios-arm64:
