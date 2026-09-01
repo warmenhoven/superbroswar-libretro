@@ -36,8 +36,8 @@
 /* The tag name used by DUMMY audio */
 #define LIBRETRO_DRIVER_NAME         "libretro"
 
-// defined in libretro.cpp
-extern short int libretro_audio_cb(int16_t *buffer, uint32_t buffer_len);
+/* defined in libretro.cpp */
+extern void libretro_audio_cb(int16_t *buffer, uint32_t buffer_len);
 
 static SDL_AudioDevice *audiodevice; 
 
@@ -155,7 +155,7 @@ void LIBRETRO_MixAudio()
 	(*spec->callback)(spec->userdata, audio->hidden->mixbuf, audio->hidden->mixlen);
 	SDL_mutexV(audio->mixer_lock);
 
-	libretro_audio_cb(audio->hidden->mixbuf, spec->size / spec->channels / 2);
+	libretro_audio_cb((int16_t *)audio->hidden->mixbuf, spec->size / spec->channels / 2);
 }
 
 static int LIBRETRO_OpenAudio(_THIS, SDL_AudioSpec *spec)
