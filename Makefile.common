@@ -15,6 +15,14 @@ FLAGS += -Wno-narrowing -Wno-unused-label
 FLAGS += -Wno-misleading-indentation -Wno-unknown-pragmas
 CXXFLAGS += -std=c++11 -fexceptions -fvisibility-inlines-hidden
 
+# GCC 14 and Clang 16 reject incompatible pointer assignments by default. The
+# SDL_image and SDL_mixer submodules declare their own prototypes for the
+# libpng and libvorbis entry points they load, and those do not carry the
+# const/restrict qualifiers the current headers use. Keep the mismatch a
+# warning so the C sources build with modern toolchains. Apply this to C only:
+# g++ rejects the option name.
+C_WARNINGS := -Wno-incompatible-pointer-types
+
 SOURCES_C =
 SOURCES_CXX =
 

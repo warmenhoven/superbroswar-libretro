@@ -517,6 +517,7 @@ include Makefile.common
 
 ifneq (,$(findstring msvc,$(platform)))
 WARNINGS :=
+C_WARNINGS :=
 else
 WARNINGS := -Wall \
 	-Wno-sign-compare \
@@ -525,13 +526,6 @@ WARNINGS := -Wall \
 	-Wno-uninitialized \
 	$(NEW_GCC_WARNING_FLAGS) \
 	-Wno-strict-aliasing
-# GCC 14 and Clang 16 reject incompatible pointer assignments by default. The
-# SDL_image and SDL_mixer submodules declare their own prototypes for the
-# libpng and libvorbis entry points they load, and those do not carry the
-# const/restrict qualifiers the current headers use. Keep the mismatch a
-# warning so the C sources build with modern toolchains. C only: g++ rejects
-# the option name.
-C_WARNINGS := -Wno-incompatible-pointer-types
 EXTRA_GCC_FLAGS := -funroll-loops
 endif
 
